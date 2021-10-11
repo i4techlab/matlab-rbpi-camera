@@ -3,21 +3,31 @@ import matlab.net.*
 import matlab.net.http.*
 
 %% AI Model that needs to be loaded
-load trainedModelTFG.mat
+% load trainedModelTFG.mat
 
 %% Building HTTP request
-r = RequestMessage;
-% URI = Uniform Resource Identifier
-uri = URI('http://10.7.0.25:20000/test1');
-% Send to port 1880 where Node-RED is listening
-resp1 = send(r,uri);
-% Image is received as a response
-filename = 'http://10.7.0.25:20000/test1';
 
-%% Image processing 
+url = 'http://10.7.0.25:20000/test1';
+
+
+%% Image processing
+
 % First step of processing the image is reading it
-Icolor = imread(filename);
+% decode image stream using Java
+jImg = javax.imageio.ImageIO.read(java.io.ByteArrayInputStream(base64decode(webread(url))));
+h = jImg.getHeight;
+w = jImg.getWidth;
+
+% convert Java Image to MATLAB image
+p = reshape(typecast(jImg.getData.getDataStorage, 'uint8'), [3,w,h]);
+Icolor = cat(3, ...
+        transpose(reshape(p(3,:,:), [w,h])), ...
+        transpose(reshape(p(2,:,:), [w,h])), ...
+        transpose(reshape(p(1,:,:), [w,h])));
+ 
 % Then it is shown in color/black & white/binary format
+
+
 figure()
 imshow(Icolor);
 title('Color image');
