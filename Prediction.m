@@ -1,14 +1,16 @@
+%% Clear/close
+clear all
+close all
+
 %% Libraries that need to be imported for communications with Node-RED
 import matlab.net.*
 import matlab.net.http.*
 
 %% AI Model that needs to be loaded
-% load trainedModelTFG.mat
+load trainedModelTFG.mat
 
 %% Building HTTP request
-
 url = 'http://10.7.0.25:20000/test1';
-
 
 %% Image processing
 
@@ -26,8 +28,6 @@ Icolor = cat(3, ...
         transpose(reshape(p(1,:,:), [w,h])));
  
 % Then it is shown in color/black & white/binary format
-
-
 figure()
 imshow(Icolor);
 title('Color image');
