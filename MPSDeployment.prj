@@ -1,21 +1,21 @@
 <deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
-  <configuration build-checksum="2099121140" file="D:\XAFIR\GIT\src\MPSDeployment.prj" location="D:\XAFIR\GIT\src" name="MPSDeployment" preferred-package-location="D:\XAFIR\GIT\src\MPSDeployment\for_redistribution" preferred-package-type="package.type.exe" target="target.ezdeploy.mps.archive" target-name="Production Server Compiler">
+  <configuration file="D:\XAFIR\GIT\cloned_repos\PredictFunctionServer.prj" location="D:\XAFIR\GIT\cloned_repos" name="PredictFunctionServer" target="target.ezdeploy.mps.archive" target-name="Production Server Compiler">
     <param.appname>PredictFunctionServer</param.appname>
     <param.icon />
     <param.icons />
     <param.version>1.0</param.version>
-    <param.intermediate>${PROJECT_ROOT}\MPSDeployment\for_testing</param.intermediate>
-    <param.files.only>${PROJECT_ROOT}\MPSDeployment\for_redistribution_files_only</param.files.only>
-    <param.output>${PROJECT_ROOT}\MPSDeployment\for_redistribution</param.output>
-    <param.logdir>${PROJECT_ROOT}\MPSDeployment</param.logdir>
+    <param.intermediate>${PROJECT_ROOT}\PredictFunctionServer\for_testing</param.intermediate>
+    <param.files.only>${PROJECT_ROOT}\PredictFunctionServer\for_redistribution_files_only</param.files.only>
+    <param.output>${PROJECT_ROOT}\PredictFunctionServer\for_redistribution</param.output>
+    <param.logdir>${PROJECT_ROOT}\PredictFunctionServer</param.logdir>
     <param.enable.clean.build>false</param.enable.clean.build>
     <param.user.defined.mcr.options />
-    <param.server.ctf>${PROJECT_ROOT}\MPSDeployment\for_testing\server\PredictFunctionServer.ctf</param.server.ctf>
-    <param.server.readme>${PROJECT_ROOT}\MPSDeployment\for_testing\server\readme.txt</param.server.readme>
+    <param.server.ctf>${PROJECT_ROOT}\PredictFunctionServer\for_testing\server\PredictFunctionServer.ctf</param.server.ctf>
+    <param.server.readme>${PROJECT_ROOT}\PredictFunctionServer\for_testing\server\readme.txt</param.server.readme>
     <param.target.type>subtarget.mads</param.target.type>
     <param.support.packages />
     <param.required.mcr.products />
-    <param.discovery.file>${PROJECT_ROOT}\MPSDeploymentFunctionSignatures.json</param.discovery.file>
+    <param.discovery.file />
     <param.classorg />
     <param.function.data />
     <param.user.only.registration>false</param.user.only.registration>
@@ -40,6 +40,7 @@
       <param.target.type />
       <param.support.packages />
       <param.required.mcr.products />
+      <param.discovery.file />
       <param.classorg />
       <param.function.data />
       <param.user.only.registration />
@@ -61,18 +62,20 @@
       </entity.package>
     </fileset.classes>
     <fileset.resources>
-      <file>D:\XAFIR\GIT\data\trainedModelTFG.mat</file>
+      <file>${PROJECT_ROOT}\trainedModelTFG.mat</file>
     </fileset.resources>
-    <fileset.depfun />
+    <fileset.depfun>
+      <file>${PROJECT_ROOT}\ImatgeClassificada.png</file>
+    </fileset.depfun>
     <fileset.package />
     <fileset.package.server>
-      <file>${PROJECT_ROOT}\MPSDeployment\for_testing\server\PredictFunctionServer.ctf</file>
-      <file>${PROJECT_ROOT}\MPSDeployment\for_testing\server\readme.txt</file>
+      <file>${PROJECT_ROOT}\PredictFunctionServer\for_testing\server\PredictFunctionServer.ctf</file>
+      <file>${PROJECT_ROOT}\PredictFunctionServer\for_testing\server\readme.txt</file>
     </fileset.package.server>
     <fileset.package.client />
     <build-deliverables>
-      <file location="${PROJECT_ROOT}\MPSDeployment\for_testing" name="readme.txt" optional="true">D:\XAFIR\GIT\src\MPSDeployment\for_testing\readme.txt</file>
-      <file location="${PROJECT_ROOT}\MPSDeployment\for_testing" name="PredictFunctionServer.ctf" optional="false">D:\XAFIR\GIT\src\MPSDeployment\for_testing\PredictFunctionServer.ctf</file>
+      <file location="${PROJECT_ROOT}\PredictFunctionServer\for_testing" name="readme.txt" optional="true">D:\XAFIR\GIT\cloned_repos\PredictFunctionServer\for_testing\readme.txt</file>
+      <file location="${PROJECT_ROOT}\PredictFunctionServer\for_testing" name="PredictFunctionServer.ctf" optional="false">D:\XAFIR\GIT\cloned_repos\PredictFunctionServer\for_testing\PredictFunctionServer.ctf</file>
     </build-deliverables>
     <workflow />
     <matlab>

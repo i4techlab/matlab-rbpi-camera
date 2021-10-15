@@ -12,14 +12,14 @@
     "PredictFunctionServer": {
         "inputs": [
             {
-                "name": "Icolor",
+                "name": "base64Img",
                 "type": [],
                 "purpose": ""
             }
         ],
         "outputs": [
             {
-                "name": "ImatgeClassificada",
+                "name": "arg_out",
                 "type": [],
                 "purpose": ""
             }
