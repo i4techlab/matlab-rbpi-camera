@@ -1,4 +1,4 @@
-function [ImatgeClassificada] = PredictFunctionServer(base64Img)
+function [arg_out] = PredictFunctionServer(base64Img)
     %% AI Model that needs to be loaded
     load trainedModelTFG.mat;
 
@@ -40,35 +40,54 @@ function [ImatgeClassificada] = PredictFunctionServer(base64Img)
     for k = 1:length(stats)
         thisboundingbox = stats(k).BoundingBox;
 
-        if strcmp(yfit(k), 'Rosca quadrada/Square thread');
+        if strcmp(yfit(k), 'Rosca quadrada');
             text(stats(k).Centroid(1), stats(k).Centroid(2), 'Rosca quadrada/Square thread', 'Color', 'r');
             Contador_RoscaQuadrada = Contador_RoscaQuadrada + 1;
             rectangle('Position', [thisboundingbox(1), thisboundingbox(2), thisboundingbox(3), thisboundingbox(4)], 'EdgeColor', 'g', 'LineWidth', 2);
 
-        elseif strcmp(yfit(k), 'Volandera petita/Small washer');
+        elseif strcmp(yfit(k), 'Volandera petita');
             text(stats(k).Centroid(1), stats(k).Centroid(2), 'Volandera petita/Small washer', 'Color', 'r');
             Contador_VolanderaPetita = Contador_VolanderaPetita + 1;
             rectangle('Position', [thisboundingbox(1), thisboundingbox(2), thisboundingbox(3), thisboundingbox(4)], 'EdgeColor', 'g', 'LineWidth', 2);
 
-        elseif strcmp(yfit(k), 'Volandera gran/Big washer');
+        elseif strcmp(yfit(k), 'Volandera gran');
             text(stats(k).Centroid(1), stats(k).Centroid(2), 'Volandera gran/Big washer', 'Color', 'r');
             Contador_VolanderaGran = Contador_VolanderaGran + 1;
             rectangle('Position', [thisboundingbox(1), thisboundingbox(2), thisboundingbox(3), thisboundingbox(4)], 'EdgeColor', 'g', 'LineWidth', 2);
 
-        elseif strcmp(yfit(k), 'Femella oberta/Open nut');
+        elseif strcmp(yfit(k), 'Femella oberta');
             text(stats(k).Centroid(1), stats(k).Centroid(2), 'Femella oberta/Open nut', 'Color', 'r');
             Contador_FemellaOberta = Contador_FemellaOberta + 1;
             rectangle('Position', [thisboundingbox(1), thisboundingbox(2), thisboundingbox(3), thisboundingbox(4)], 'EdgeColor', 'g', 'LineWidth', 2);
 
-        elseif strcmp(yfit(k), 'Cargol cilindric/Cylindrical screw');
+        elseif strcmp(yfit(k), 'Cargol cilindric')
             text(stats(k).Centroid(1), stats(k).Centroid(2), 'Cargol cilindric/Cylindrical screw', 'Color', 'r');
             Contador_CargolCilindric = Contador_CargolCilindric + 1;
             rectangle('Position', [thisboundingbox(1), thisboundingbox(2), thisboundingbox(3), thisboundingbox(4)], 'EdgeColor', 'g', 'LineWidth', 2);
         end
-
     end
-
-    %% Write processed image
+    hold off
+    
+    % Save processed image
     frm = getframe(fh);
     imwrite(frm.cdata, 'ImatgeClassificada.png');
-    ImatgeClassificada = (imread('ImatgeClassificada.png'));
+    ImatgeClassificada = (imread('ImatgeClassificada.png')); 
+
+    % Base64 Image Encoder
+    fid = fopen('ImatgeClassificada.png','rb');
+    bytes = fread(fid);
+    fclose(fid);
+    encoder = org.apache.commons.codec.binary.Base64;
+    base64string = char(encoder.encode(bytes))';
+
+    % A struct is built as a response
+    field1 = 'ImatgeClassificada';  value1 = base64string;
+    field2 = 'Contador_CargolCilindric';  value2 = {Contador_CargolCilindric};
+    field3 = 'Contador_FemellaOberta';  value3 = {Contador_FemellaOberta};
+    field4 = 'Contador_RoscaQuadrada'; value4 = {Contador_RoscaQuadrada};
+    field5 = 'Contador_VolanderaGran'; value5 = {Contador_VolanderaGran};
+    field6 = 'Contador_VolanderaPetita'; value6 = {Contador_VolanderaPetita};
+    s_out = struct(field1,value1,field2,value2,field3,value3,field4,value4,field5,value5,field6,value6);
+
+    % A JSON-formatted text is created from structured MATLAB data
+    arg_out = jsonencode(s_out);
