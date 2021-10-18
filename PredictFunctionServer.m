@@ -1,11 +1,12 @@
-function [arg_out] = PredictFunctionServer(base64Img)
+function [processedImage_base64,counters] = PredictFunctionServer(inputImage_base64)
+%#function ClassificationTree
     %% AI Model that needs to be loaded
     load trainedModelTFG.mat;
 
     %% Image processing
 
     % decode image stream using Java
-    jImg = javax.imageio.ImageIO.read(java.io.ByteArrayInputStream(base64decode(base64Img)));
+    jImg = javax.imageio.ImageIO.read(java.io.ByteArrayInputStream(matlab.net.base64decode(inputImage_base64)));
     h = jImg.getHeight;
     w = jImg.getWidth;
 
@@ -25,6 +26,7 @@ function [arg_out] = PredictFunctionServer(base64Img)
     numele = max(max(L));
     stats = regionprops(L, 'all');
     Dades = struct2table(stats);
+    
     yfit = trainedModelTFG.predictFcn(Dades);
     fh = figure;
     % Picture with elements found by the model
@@ -78,16 +80,13 @@ function [arg_out] = PredictFunctionServer(base64Img)
     bytes = fread(fid);
     fclose(fid);
     encoder = org.apache.commons.codec.binary.Base64;
-    base64string = char(encoder.encode(bytes))';
+    processedImage_base64 = char(encoder.encode(bytes))';
 
     % A struct is built as a response
-    field1 = 'ImatgeClassificada';  value1 = base64string;
-    field2 = 'Contador_CargolCilindric';  value2 = {Contador_CargolCilindric};
-    field3 = 'Contador_FemellaOberta';  value3 = {Contador_FemellaOberta};
-    field4 = 'Contador_RoscaQuadrada'; value4 = {Contador_RoscaQuadrada};
-    field5 = 'Contador_VolanderaGran'; value5 = {Contador_VolanderaGran};
-    field6 = 'Contador_VolanderaPetita'; value6 = {Contador_VolanderaPetita};
-    s_out = struct(field1,value1,field2,value2,field3,value3,field4,value4,field5,value5,field6,value6);
-
-    % A JSON-formatted text is created from structured MATLAB data
-    arg_out = jsonencode(s_out);
+   
+    field1 = 'Contador_CargolCilindric';  value1 = {Contador_CargolCilindric};
+    field2 = 'Contador_FemellaOberta';  value2 = {Contador_FemellaOberta};
+    field3 = 'Contador_RoscaQuadrada'; value3 = {Contador_RoscaQuadrada};
+    field4 = 'Contador_VolanderaGran'; value4 = {Contador_VolanderaGran};
+    field5 = 'Contador_VolanderaPetita'; value5 = {Contador_VolanderaPetita};
+    counters = struct(field1,value1,field2,value2,field3,value3,field4,value4,field5,value5);
