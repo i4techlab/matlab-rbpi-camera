@@ -1,4 +1,4 @@
-function [processedImage_base64,counters] = PredictFunctionServer(inputImage_base64)
+function [processedImage_base64,counters,binarizedImage_base64] = PredictFunctionServer(inputImage_base64)
 %#function ClassificationTree
     %% AI Model that needs to be loaded
     load trainedModelTFG.mat;
@@ -19,6 +19,7 @@ function [processedImage_base64,counters] = PredictFunctionServer(inputImage_bas
     I = wiener2(I, [3 3]);
     I = medfilt2(I);
     BW = im2bw(I, 0.65);
+    imwrite(BW, 'ImatgeBinaritzada.jpeg');
 
     %% Classification of elements using picture in binary format
     % Image properties extraction
@@ -43,27 +44,27 @@ function [processedImage_base64,counters] = PredictFunctionServer(inputImage_bas
         thisboundingbox = stats(k).BoundingBox;
 
         if strcmp(yfit(k), 'Rosca quadrada');
-            text(stats(k).Centroid(1), stats(k).Centroid(2), 'Rosca quadrada/Square thread', 'Color', 'r');
+            text(stats(k).Centroid(1), stats(k).Centroid(2), 'Rosca quadrada/Square thread', 'Color', 'r', 'FontSize', 14);
             Contador_RoscaQuadrada = Contador_RoscaQuadrada + 1;
             rectangle('Position', [thisboundingbox(1), thisboundingbox(2), thisboundingbox(3), thisboundingbox(4)], 'EdgeColor', 'g', 'LineWidth', 2);
 
         elseif strcmp(yfit(k), 'Volandera petita');
-            text(stats(k).Centroid(1), stats(k).Centroid(2), 'Volandera petita/Small washer', 'Color', 'r');
+            text(stats(k).Centroid(1), stats(k).Centroid(2), 'Volandera petita/Small washer', 'Color', 'r', 'FontSize', 14);
             Contador_VolanderaPetita = Contador_VolanderaPetita + 1;
             rectangle('Position', [thisboundingbox(1), thisboundingbox(2), thisboundingbox(3), thisboundingbox(4)], 'EdgeColor', 'g', 'LineWidth', 2);
 
         elseif strcmp(yfit(k), 'Volandera gran');
-            text(stats(k).Centroid(1), stats(k).Centroid(2), 'Volandera gran/Big washer', 'Color', 'r');
+            text(stats(k).Centroid(1), stats(k).Centroid(2), 'Volandera gran/Big washer', 'Color', 'r', 'FontSize', 14);
             Contador_VolanderaGran = Contador_VolanderaGran + 1;
             rectangle('Position', [thisboundingbox(1), thisboundingbox(2), thisboundingbox(3), thisboundingbox(4)], 'EdgeColor', 'g', 'LineWidth', 2);
 
         elseif strcmp(yfit(k), 'Femella oberta');
-            text(stats(k).Centroid(1), stats(k).Centroid(2), 'Femella oberta/Open nut', 'Color', 'r');
+            text(stats(k).Centroid(1), stats(k).Centroid(2), 'Femella oberta/Open nut', 'Color', 'r', 'FontSize', 14);
             Contador_FemellaOberta = Contador_FemellaOberta + 1;
             rectangle('Position', [thisboundingbox(1), thisboundingbox(2), thisboundingbox(3), thisboundingbox(4)], 'EdgeColor', 'g', 'LineWidth', 2);
 
         elseif strcmp(yfit(k), 'Cargol cilindric')
-            text(stats(k).Centroid(1), stats(k).Centroid(2), 'Cargol cilindric/Cylindrical screw', 'Color', 'r');
+            text(stats(k).Centroid(1), stats(k).Centroid(2), 'Cargol cilindric/Cylindrical screw', 'Color', 'r', 'FontSize', 14);
             Contador_CargolCilindric = Contador_CargolCilindric + 1;
             rectangle('Position', [thisboundingbox(1), thisboundingbox(2), thisboundingbox(3), thisboundingbox(4)], 'EdgeColor', 'g', 'LineWidth', 2);
         end
@@ -81,6 +82,12 @@ function [processedImage_base64,counters] = PredictFunctionServer(inputImage_bas
     fclose(fid);
     encoder = org.apache.commons.codec.binary.Base64;
     processedImage_base64 = char(encoder.encode(bytes))';
+    
+    fid = fopen('ImatgeBinaritzada.jpeg','rb');
+    bytes = fread(fid);
+    fclose(fid);
+    encoder = org.apache.commons.codec.binary.Base64;
+    binarizedImage_base64 = char(encoder.encode(bytes))';
 
     % A struct is built as a response
    
