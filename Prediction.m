@@ -99,11 +99,14 @@ hold off
 
 % Save processed image
 frm = getframe(fh);
-imwrite(frm.cdata, 'ImatgeClassificada.png');
-ImatgeClassificada = (imread('ImatgeClassificada.png')); 
+imwrite(frm.cdata, 'ImatgeClassificada.jpeg');
+% ImatgeClassificada = (imread('ImatgeClassificada.png'));
+
+% jImgwrite = javax.imageio.ImageIO.write(matlab.net.base64encode(frm.cdata));
+
 
 % Base64 Image Encoder
-fid = fopen('ImatgeClassificada.png','rb');
+fid = fopen('ImatgeClassificada.jpeg','rb');
 bytes = fread(fid);
 fclose(fid);
 encoder = org.apache.commons.codec.binary.Base64;
