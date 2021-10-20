@@ -44,27 +44,27 @@ function [processedImage_base64,counters,binarizedImage_base64] = PredictFunctio
         thisboundingbox = stats(k).BoundingBox;
 
         if strcmp(yfit(k), 'Rosca quadrada');
-            text(stats(k).Centroid(1), stats(k).Centroid(2), 'Rosca quadrada/Square thread', 'Color', 'r', 'FontSize', 14);
+            text(stats(k).Centroid(1), stats(k).Centroid(2), 'Rosca quadrada/Square thread', 'Color', 'r', 'FontSize', 24);
             Contador_RoscaQuadrada = Contador_RoscaQuadrada + 1;
             rectangle('Position', [thisboundingbox(1), thisboundingbox(2), thisboundingbox(3), thisboundingbox(4)], 'EdgeColor', 'g', 'LineWidth', 2);
 
         elseif strcmp(yfit(k), 'Volandera petita');
-            text(stats(k).Centroid(1), stats(k).Centroid(2), 'Volandera petita/Small washer', 'Color', 'r', 'FontSize', 14);
+            text(stats(k).Centroid(1), stats(k).Centroid(2), 'Volandera petita/Small washer', 'Color', 'r', 'FontSize', 24);
             Contador_VolanderaPetita = Contador_VolanderaPetita + 1;
             rectangle('Position', [thisboundingbox(1), thisboundingbox(2), thisboundingbox(3), thisboundingbox(4)], 'EdgeColor', 'g', 'LineWidth', 2);
 
         elseif strcmp(yfit(k), 'Volandera gran');
-            text(stats(k).Centroid(1), stats(k).Centroid(2), 'Volandera gran/Big washer', 'Color', 'r', 'FontSize', 14);
+            text(stats(k).Centroid(1), stats(k).Centroid(2), 'Volandera gran/Big washer', 'Color', 'r', 'FontSize', 24);
             Contador_VolanderaGran = Contador_VolanderaGran + 1;
             rectangle('Position', [thisboundingbox(1), thisboundingbox(2), thisboundingbox(3), thisboundingbox(4)], 'EdgeColor', 'g', 'LineWidth', 2);
 
         elseif strcmp(yfit(k), 'Femella oberta');
-            text(stats(k).Centroid(1), stats(k).Centroid(2), 'Femella oberta/Open nut', 'Color', 'r', 'FontSize', 14);
+            text(stats(k).Centroid(1), stats(k).Centroid(2), 'Femella oberta/Open nut', 'Color', 'r', 'FontSize', 24);
             Contador_FemellaOberta = Contador_FemellaOberta + 1;
             rectangle('Position', [thisboundingbox(1), thisboundingbox(2), thisboundingbox(3), thisboundingbox(4)], 'EdgeColor', 'g', 'LineWidth', 2);
 
         elseif strcmp(yfit(k), 'Cargol cilindric')
-            text(stats(k).Centroid(1), stats(k).Centroid(2), 'Cargol cilindric/Cylindrical screw', 'Color', 'r', 'FontSize', 14);
+            text(stats(k).Centroid(1), stats(k).Centroid(2), 'Cargol cilindric/Cylindrical screw', 'Color', 'r', 'FontSize', 24);
             Contador_CargolCilindric = Contador_CargolCilindric + 1;
             rectangle('Position', [thisboundingbox(1), thisboundingbox(2), thisboundingbox(3), thisboundingbox(4)], 'EdgeColor', 'g', 'LineWidth', 2);
         end

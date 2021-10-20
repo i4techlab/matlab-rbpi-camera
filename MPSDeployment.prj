@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
-  <configuration build-checksum="2078264281" file="D:\XAFIR\GIT\cloned_repos\MPSDeployment.prj" location="D:\XAFIR\GIT\cloned_repos" name="MPSDeployment" preferred-package-location="D:\XAFIR\GIT\cloned_repos\MPSDeployment\for_redistribution" preferred-package-type="package.type.exe" target="target.ezdeploy.mps.archive" target-name="Production Server Compiler">
+  <configuration build-checksum="2421179535" file="D:\XAFIR\GIT\cloned_repos\MPSDeployment.prj" location="D:\XAFIR\GIT\cloned_repos" name="MPSDeployment" preferred-package-location="D:\XAFIR\GIT\cloned_repos\MPSDeployment\for_redistribution" preferred-package-type="package.type.exe" target="target.ezdeploy.mps.archive" target-name="Production Server Compiler">
     <param.appname>PredictFunctionServer</param.appname>
     <param.icon />
     <param.icons />
@@ -63,6 +63,7 @@
     </fileset.classes>
     <fileset.resources />
     <fileset.depfun>
+      <file>${PROJECT_ROOT}\ImatgeClassificada.jpeg</file>
       <file>${PROJECT_ROOT}\trainedModelTFG.mat</file>
     </fileset.depfun>
     <fileset.package />
