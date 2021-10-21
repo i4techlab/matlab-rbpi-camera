@@ -15,7 +15,7 @@
     <param.target.type>subtarget.mads</param.target.type>
     <param.support.packages />
     <param.required.mcr.products />
-    <param.discovery.file>${PROJECT_ROOT}\MPSDeploymentFunctionSignatures.json</param.discovery.file>
+    <param.discovery.file />
     <param.classorg />
     <param.function.data />
     <param.user.only.registration>false</param.user.only.registration>
@@ -40,6 +40,7 @@
       <param.target.type />
       <param.support.packages />
       <param.required.mcr.products />
+      <param.discovery.file />
       <param.classorg />
       <param.function.data />
       <param.user.only.registration />
