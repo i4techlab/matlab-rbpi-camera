@@ -12,19 +12,29 @@
     "PredictFunctionServer": {
         "inputs": [
             {
-                "name": "base64Img",
+                "name": "inputImage_base64",
                 "type": [],
                 "purpose": ""
             }
         ],
         "outputs": [
             {
-                "name": "arg_out",
+                "name": "processedImage_base64",
+                "type": [],
+                "purpose": ""
+            },
+            {
+                "name": "counters",
+                "type": [],
+                "purpose": ""
+            },
+            {
+                "name": "binarizedImage_base64",
                 "type": [],
                 "purpose": ""
             }
         ],
-        "purpose": "  AI Model that needs to be loaded\n"
+        "purpose": " #function ClassificationTree\n  AI Model that needs to be loaded\n"
     },
     "_schemaVersion": "1.1.0"
 }
