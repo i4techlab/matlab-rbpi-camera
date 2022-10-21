@@ -1,5 +1,8 @@
 function [processedImage_base64,counters,binarizedImage_base64] = PredictFunctionServer(inputImage_base64)
-%#function ClassificationTree
+
+    %% Pragma function of ClassificationTree
+    %#function ClassificationTree
+    
     %% AI Model that needs to be loaded
     load trainedModelTFG.mat;
 
